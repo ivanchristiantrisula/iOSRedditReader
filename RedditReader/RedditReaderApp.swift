@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct RedditReaderApp: App {
+    let vm = PostsViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PostsView(postViewModel: vm)
         }
     }
 }
