@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct Post : Decodable {
-    var title : String
-    var subreddit : String
-    var scores : Int
-    var num_comments : Double
-    var author : String
-    var created_utc: Float
-    var thumbnail : URL
-    var clicked : Bool
+struct Post : Decodable, Identifiable, Equatable {
+    let id : String
+    let title : String
+    let subreddit : String
+    let numComments : Double
+    let author : String
+    let createdUtc: Float
+    let thumbnail : String
+    let clicked : Bool
+    let score : Int
 }

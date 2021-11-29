@@ -8,9 +8,39 @@
 import SwiftUI
 
 struct PostsView: View {
-    var postViewModel : PostsViewModel
+    @ObservedObject var postViewModel : PostsViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        posts
+        
+    }
+    
+    var posts: some View {
+        ScrollView{
+            
+            if(postViewModel.posts != nil){
+                ForEach(postViewModel.posts!){ post in
+                    LazyVStack(alignment: .leading){
+                        ZStack{
+                            Rectangle().foregroundColor(Color.white).border(.black)
+                            Text("\(post.title)")
+                                .onAppear {
+                                    if(post == postViewModel.posts?.last){
+                                        postViewModel.getAfterPosts()
+                                    }
+                                }
+                        }
+                        
+                    }
+                    .padding()
+                }
+                    
+            }
+            if(postViewModel.loadingState == .LOADING){
+                ProgressView().scaleEffect(1)
+            }
+        }
+        .padding(.vertical, 2.0)
+        
     }
 }
 
