@@ -9,10 +9,16 @@ import SwiftUI
 
 @main
 struct RedditReaderApp: App {
+    @State var activePage = "post"
+    @State var comment = ""
+    
     let vm = PostsViewModel()
     var body: some Scene {
         WindowGroup {
-            PostsView(postViewModel: vm)
+            NavigationView{
+                PostsView(postViewModel: vm)
+            }
+            
         }
     }
 }

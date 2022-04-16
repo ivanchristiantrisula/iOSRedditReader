@@ -11,10 +11,10 @@ struct Post : Decodable, Identifiable, Equatable {
     let id : String
     let title : String
     let subreddit : String
-    let numComments : Double
+    let numComments : Int
     let author : String
     let createdUtc: Float
-    let thumbnail : String
+    let thumbnail : String?
     let clicked : Bool
     let score : Int
 }

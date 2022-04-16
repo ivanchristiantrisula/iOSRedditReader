@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8610BD08275741A6001129D8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8610BD07275741A6001129D8 /* Comment.swift */; };
+		8610BD0A2757F596001129D8 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8610BD092757F596001129D8 /* CommentView.swift */; };
+		865ED1E7280B3D7100613CF7 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865ED1E6280B3D7100613CF7 /* CommentsViewModel.swift */; };
 		86F4F4A02726FDC500645F2C /* RedditReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4F49F2726FDC500645F2C /* RedditReaderApp.swift */; };
 		86F4F4A42726FDC700645F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86F4F4A32726FDC700645F2C /* Assets.xcassets */; };
 		86F4F4A72726FDC700645F2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86F4F4A62726FDC700645F2C /* Preview Assets.xcassets */; };
 		86F4F4B22726FE2500645F2C /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4F4B12726FE2500645F2C /* PostsView.swift */; };
 		86F4F4B42726FE7400645F2C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4F4B32726FE7400645F2C /* Post.swift */; };
 		86F4F4B62726FE8D00645F2C /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4F4B52726FE8D00645F2C /* PostsViewModel.swift */; };
+		86F9A7EB2807E1E20065B9CD /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F9A7EA2807E1E20065B9CD /* PostCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8610BD07275741A6001129D8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		8610BD092757F596001129D8 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		865ED1E6280B3D7100613CF7 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		86F4F49C2726FDC500645F2C /* RedditReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86F4F49F2726FDC500645F2C /* RedditReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditReaderApp.swift; sourceTree = "<group>"; };
 		86F4F4A32726FDC700645F2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -23,6 +30,7 @@
 		86F4F4B12726FE2500645F2C /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		86F4F4B32726FE7400645F2C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		86F4F4B52726FE8D00645F2C /* PostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
+		86F9A7EA2807E1E20065B9CD /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				86F4F4B02726FDE800645F2C /* ViewModels */,
-				86F4F4AF2726FDDD00645F2C /* Extensions */,
 				86F4F4AE2726FDD800645F2C /* Models */,
 				86F4F4AD2726FDD000645F2C /* Views */,
 				86F4F49F2726FDC500645F2C /* RedditReaderApp.swift */,
@@ -78,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				86F4F4B12726FE2500645F2C /* PostsView.swift */,
+				8610BD092757F596001129D8 /* CommentView.swift */,
+				86F9A7EA2807E1E20065B9CD /* PostCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -86,21 +95,16 @@
 			isa = PBXGroup;
 			children = (
 				86F4F4B32726FE7400645F2C /* Post.swift */,
+				8610BD07275741A6001129D8 /* Comment.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		86F4F4AF2726FDDD00645F2C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		86F4F4B02726FDE800645F2C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				86F4F4B52726FE8D00645F2C /* PostsViewModel.swift */,
+				865ED1E6280B3D7100613CF7 /* CommentsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -175,10 +179,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8610BD0A2757F596001129D8 /* CommentView.swift in Sources */,
+				8610BD08275741A6001129D8 /* Comment.swift in Sources */,
 				86F4F4B62726FE8D00645F2C /* PostsViewModel.swift in Sources */,
 				86F4F4A02726FDC500645F2C /* RedditReaderApp.swift in Sources */,
+				865ED1E7280B3D7100613CF7 /* CommentsViewModel.swift in Sources */,
 				86F4F4B22726FE2500645F2C /* PostsView.swift in Sources */,
 				86F4F4B42726FE7400645F2C /* Post.swift in Sources */,
+				86F9A7EB2807E1E20065B9CD /* PostCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +325,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -347,7 +355,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
