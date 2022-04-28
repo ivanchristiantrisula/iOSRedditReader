@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PostCard: View {
     let post : Post;
@@ -17,15 +18,21 @@ struct PostCard: View {
                 Text(post.title)
                     .font(.headline)
                     .frame(maxWidth : .infinity, alignment: .topLeading)
+                    .foregroundColor(post.stickied ? Color.green : Color.primary)
                 
                 //THUMBNAIL
-                if((post.thumbnail) != nil && post.thumbnail != "nsfw"){
-                    AsyncImage(url: URL(string: post.thumbnail!)) { image in
-                        image.resizable()
-                    } placeholder: {
-                        ProgressView()
-                    }
-                    .aspectRatio(contentMode: .fit)
+                if(post.thumbnail!.isValidURL){
+                    KFImage
+                        .url(URL(string : post.thumbnail ?? ""))
+                        .loadDiskFileSynchronously()
+                        .placeholder { progress in
+                            ProgressView();
+                        }
+                        .cacheMemoryOnly()
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth : .infinity, alignment: .center)
+                        
                 }
                 
                 
@@ -53,6 +60,22 @@ struct PostCard: View {
         .frame(maxWidth : .infinity, alignment: .topLeading)
         
     }
+}
+
+extension String {
+    var isValidURL: Bool {
+        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
+            // it is a link, if the match covers the whole string
+            return match.range.length == self.utf16.count
+        } else {
+            return false
+        }
+    }
+    
+    
+    
+    
 }
 
 //struct PostCard_Previews: PreviewProvider {

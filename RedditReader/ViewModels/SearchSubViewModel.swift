@@ -1,16 +1,18 @@
 //
-//  CommentsViewModel.swift
+//  SearchViewModel.swift
 //  RedditReader
 //
-//  Created by Ivan Christian on 17/04/22.
+//  Created by Ivan Christian on 28/04/22.
 //
 
 import Foundation
 
-class CommentsViewModel : ObservableObject {
-    let post : Post;
-    @Published var comments : [CommentAPIResponseListing] = []
-    @Published var loadingState : loadingStateEnum = .LOADING
+class SearchSubViewModel : ObservableObject{
+    @Published var subs : [SearchSubListingChild] = [];
+    @Published var keyword : String = ""
+    
+    
+    init(){}
     
     enum loadingStateEnum{
         case IDLE
@@ -18,29 +20,25 @@ class CommentsViewModel : ObservableObject {
         case ERROR
     }
     
-    init(_ post:Post){
-        self.post = post
-        fetchComments()
-    }
+    var loadingState : loadingStateEnum = .IDLE
     
-    func fetchComments () {
+    func fetchSubs (_ keyword : String) {
+        print("masok")
         loadingState = .LOADING
-        callFetchCommentAPI() { result, error in
+        callFetchAPI(keyword) { result, error in
             if let error = error {
                 print(error.localizedDescription)
                 self.loadingState = .ERROR
             }
             if let result = result {
-                
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 do{
-                    let decoded = try decoder.decode(CommentAPIResponseMostOuter.self, from:result)
+                    let decoded = try decoder.decode(SearchSubMostOuter.self, from: result)
                     
                     DispatchQueue.main.async {
-                        self.comments.append(decoded.data.children[0])
+                        self.subs = decoded.data?.children ?? []
                         
-//                        self.after = decoded.after
                         self.loadingState = .IDLE
                     }
                     
@@ -53,12 +51,9 @@ class CommentsViewModel : ObservableObject {
         }
     }
     
-    private func callFetchCommentAPI (completion: @escaping (_ data: Data?, _ error: Error?) -> Void) {
-        let url = "https://www.reddit.com\(post.permalink)/.json"
+    private func callFetchAPI (_ keyword : String, completion: @escaping (_ data: Data?, _ error: Error?) -> Void) {
+        let url = "https://www.reddit.com/search/.json?q=\(keyword)&type=sr"
         
-//        if(after != nil){
-//            url+="after="+after!
-//        }
         let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
             if let error = error {
                 completion(nil, error)
@@ -72,4 +67,7 @@ class CommentsViewModel : ObservableObject {
         })
         task.resume()
     }
+    
+    
+    
 }

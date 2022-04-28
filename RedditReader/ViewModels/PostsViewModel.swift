@@ -20,7 +20,7 @@ class PostsViewModel: ObservableObject {
     }
     
     init(){
-        fetchPosts("/")
+        fetchPosts("/r/indonesia")
     }
     
     func fetchPosts (_ subreddit : String) {

@@ -15,52 +15,74 @@ struct PostsView: View {
     }
     
     var posts: some View {
-        
-            
-        List{
-            if(postViewModel.posts != nil){
-                ForEach(postViewModel.posts!){ post in
-                        PostCard(post: post)
-                            .onAppear(){
-                                if(self.postViewModel.posts?.last == post){
-                                    postViewModel.getAfterPosts()
+        NavigationView{
+            List{
+                if(postViewModel.posts != nil){
+                    ForEach(postViewModel.posts!){ post in
+                            PostCard(post: post)
+                                .onAppear(){
+                                    if(self.postViewModel.posts?.last == post){
+                                        postViewModel.getAfterPosts()
+                                    }
                                 }
-                            }
-                            .background(
-                                NavigationLink("",destination : CommentView(commentViewModel: CommentsViewModel(post)))
-                                    .opacity(0)
-                            ) //remove navigation link shitty arrow.
-                            
-                            
+                                .background(
+                                    NavigationLink("", destination: {
+                                        switch post.url.getUrlType(){
+                                        case .image :
+                                            FullImageView(imageURL: post.url)
+                                        default :
+                                           WebView()
+                                        }
+                                    })
+                                    
+                                    
+                                        
+                                ) //remove navigation link shitty arrow.
+                                
+                                
+                        
+                    }
+                    .listRowInsets(EdgeInsets())
+                    .padding(.vertical)
                     
                 }
-                .listRowInsets(EdgeInsets())
-                .padding(.vertical)
-                
+                if(postViewModel.loadingState == .LOADING){
+                    ProgressView().scaleEffect(1)
+                }
             }
-            if(postViewModel.loadingState == .LOADING){
-                ProgressView().scaleEffect(1)
-            }
+            .navigationTitle("Frontpage")
+            .listStyle(PlainListStyle())
+            .listRowSeparator(.hidden)
         }
-        .navigationTitle("Frontpage")
-        .listStyle(PlainListStyle())
         
             
         
     }
 }
 
+
 extension String {
-    var isValidURL: Bool {
-        let detector = try! NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
-        if let match = detector.firstMatch(in: self, options: [], range: NSRange(location: 0, length: self.utf16.count)) {
-            // it is a link, if the match covers the whole string
-            return match.range.length == self.utf16.count
-        } else {
-            return false
+    enum UrlType {
+        case image, video, other
+    }
+    func getUrlType() -> UrlType{
+        let imageExts = ["jpeg", "jpg", "png", "gif", "webp", "svg"]
+        let videoExts = [".mp4",".avi", "webm"]
+        
+        let url = URL(string: self)
+        let pathExt = url?.pathExtension
+        
+        if(imageExts.contains(pathExt!)){
+            return .image
+        }else if(videoExts.contains(pathExt!)){
+            return .video
+        }else{
+            return .other
         }
     }
 }
+
+
 
 struct PostsView_Previews: PreviewProvider {
     static var previews: some View {

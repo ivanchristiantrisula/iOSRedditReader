@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Comment {
+struct Comment: Decodable, Identifiable ,Hashable{
+    var id: String
     var body : String
     var score : Int
     var author : String
@@ -16,10 +17,15 @@ struct Comment {
     var replies : CommentAPIResponseMostOuter?
 }
 
-struct CommentAPIResponseMostOuter {
+struct CommentAPIResponseMostOuter : Decodable,Hashable{
    var data : CommentAPIResponseOuter
 }
 
-struct CommentAPIResponseOuter{
-    var children : [Comment]
+struct CommentAPIResponseOuter : Decodable,Hashable{
+    var children : [CommentAPIResponseListing]
 }
+
+struct CommentAPIResponseListing : Decodable, Hashable{
+    var data : Comment
+}
+

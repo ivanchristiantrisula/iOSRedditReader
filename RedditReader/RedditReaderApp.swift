@@ -15,8 +15,17 @@ struct RedditReaderApp: App {
     let vm = PostsViewModel()
     var body: some Scene {
         WindowGroup {
-            NavigationView{
+            TabView{
                 PostsView(postViewModel: vm)
+                    .tabItem {
+                    Label("Posts", systemImage: "newspaper")
+                    }
+                
+                SearchView()
+                    .tabItem{
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+                
             }
             
         }

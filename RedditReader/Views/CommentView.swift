@@ -12,8 +12,12 @@ struct CommentView: View {
     var body: some View {
         
         List{
-            
+            ForEach(commentViewModel.comments, id: \.self) { comment in
+                Text(comment.data.body)
+            }
         }
+        .navigationTitle("\(String(commentViewModel.post.numComments)) Comments")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
