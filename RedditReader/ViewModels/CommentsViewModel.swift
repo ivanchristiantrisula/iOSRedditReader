@@ -9,7 +9,8 @@ import Foundation
 
 class CommentsViewModel : ObservableObject {
     let post : Post;
-    @Published var comments : [CommentAPIResponseListing] = []
+    var after = "";
+    @Published var comments : [Comment] = []
     @Published var loadingState : loadingStateEnum = .LOADING
     
     enum loadingStateEnum{
@@ -35,12 +36,12 @@ class CommentsViewModel : ObservableObject {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 do{
-                    let decoded = try decoder.decode(CommentAPIResponseMostOuter.self, from:result)
+                    let decoded = try decoder.decode([ListingResponse<Comment>].self, from:result)
                     
                     DispatchQueue.main.async {
-                        self.comments.append(decoded.data.children[0])
+                        self.comments+=decoded.last?.data?.children.map {$0.data} ?? []
                         
-//                        self.after = decoded.after
+                        self.after = decoded[1].data?.after ?? ""
                         self.loadingState = .IDLE
                     }
                     
@@ -55,7 +56,7 @@ class CommentsViewModel : ObservableObject {
     
     private func callFetchCommentAPI (completion: @escaping (_ data: Data?, _ error: Error?) -> Void) {
         let url = "https://www.reddit.com\(post.permalink)/.json"
-        
+        print(url)
 //        if(after != nil){
 //            url+="after="+after!
 //        }

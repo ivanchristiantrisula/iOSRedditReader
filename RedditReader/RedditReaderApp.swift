@@ -11,20 +11,24 @@ import SwiftUI
 struct RedditReaderApp: App {
     @State var activePage = "post"
     @State var comment = ""
+    @State private var tabSelection = 1
+    @StateObject var postVM = PostsViewModel()
     
-    let vm = PostsViewModel()
     var body: some Scene {
         WindowGroup {
-            TabView{
-                PostsView(postViewModel: vm)
+            TabView(selection: $tabSelection){
+                PostsView(postViewModel: postVM)
                     .tabItem {
-                    Label("Posts", systemImage: "newspaper")
+                        Label("Posts", systemImage: "newspaper")
                     }
+                    .tag(1)
                 
-                SearchView()
+                SearchView(tabSelection: $tabSelection)
                     .tabItem{
                         Label("Search", systemImage: "magnifyingglass")
                     }
+                    .environmentObject(postVM)
+                    .tag(2)
                 
             }
             

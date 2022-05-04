@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import Kingfisher
+import InitialsUI
 
 
 struct SearchView: View {
-    
     @ObservedObject var searchSubVM = SearchSubViewModel()
     @State var searchText: String = ""
+    @EnvironmentObject var postVM : PostsViewModel;
+    @Binding var tabSelection: Int
+    
     var body: some View {
         NavigationView{
             List{
@@ -27,29 +31,31 @@ struct SearchView: View {
                     }
                 ForEach(searchSubVM.subs, id: \.self){sub in
                     HStack(alignment: .top) {
+                        if(sub.data.iconImg != nil){
+                            KFImage
+                                .url(URL(string : sub.data.iconImg ?? ""))
+                                .loadDiskFileSynchronously()
+                                .cacheMemoryOnly()
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 30, height: 30)
+                                .clipShape(Circle())
+                        }else{
+                            InitialsUI(initials: String(sub.data.displayName.prefix(1)).uppercased(), useDefaultForegroundColor: true, fontWeight: .bold)
+                                .frame(width: 30, height: 30)
+                                .clipShape(Circle())
+                        }
                         VStack(alignment: .leading) {
                             Text(String(sub.data.displayName))
-                            Divider()
                         }
                         
                         Spacer()
                     }
+                    .onTapGesture {
+                        postVM.changeSubreddit(sr: sub.data.displayNamePrefixed)
+                    }
                 }
             }.navigationTitle(Text("Search"))
         }
-    }
-}
-
-
-
-extension UIImageView {
-
-    func addInitials(first: String, second: String) {
-        let initials = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height))
-        initials.center = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2)
-        initials.textAlignment = .center
-        initials.text = first + " " + second
-        initials.textColor = .black
-        self.addSubview(initials)
     }
 }

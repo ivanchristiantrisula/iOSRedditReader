@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PostsView: View {
     @ObservedObject var postViewModel : PostsViewModel
+    @State var selectedPost : Post? = nil
     var body: some View {
         posts
             
@@ -17,47 +18,43 @@ struct PostsView: View {
     var posts: some View {
         NavigationView{
             List{
-                if(postViewModel.posts != nil){
-                    ForEach(postViewModel.posts!){ post in
-                            PostCard(post: post)
-                                .onAppear(){
-                                    if(self.postViewModel.posts?.last == post){
-                                        postViewModel.getAfterPosts()
-                                    }
+                ForEach(postViewModel.posts){ post in
+                        PostCard(post: post)
+                            .onAppear(){
+                                if(self.postViewModel.posts.last == post){
+                                    postViewModel.getAfterPosts()
                                 }
-                                .background(
-                                    NavigationLink("", destination: {
-                                        switch post.url.getUrlType(){
-                                        case .image :
-                                            FullImageView(imageURL: post.url)
-                                        default :
-                                           WebView()
-                                        }
-                                    })
-                                    
-                                    
-                                        
-                                ) //remove navigation link shitty arrow.
-                                
-                                
-                        
-                    }
-                    .listRowInsets(EdgeInsets())
-                    .padding(.vertical)
-                    
+                            }
+                            .onTapGesture(perform: {
+                                self.selectedPost = post
+                            })
                 }
-                if(postViewModel.loadingState == .LOADING){
-                    ProgressView().scaleEffect(1)
-                }
+                .listRowInsets(EdgeInsets())
+                .padding(.vertical)
             }
-            .navigationTitle("Frontpage")
+            .navigationTitle(filterPrefixedSrName(postViewModel.subreddit))
             .listStyle(PlainListStyle())
             .listRowSeparator(.hidden)
-        }
-        
+            .sheet(item: self.$selectedPost, content: { post in
+                CommentView(commentViewModel: CommentsViewModel(post))
+            })
             
-        
+            
+            if(postViewModel.loadingState == .LOADING){
+                ProgressView().scaleEffect(1)
+            }
+        }
     }
+}
+
+func filterPrefixedSrName(_ name : String) -> String {
+    if(name == "/"){
+        return "Frontpage"
+    }
+    
+    let srName = String(name.dropFirst(2))
+    let correctedCaseSrName = srName.prefix(1).uppercased()+srName.dropFirst(1)
+    return correctedCaseSrName
 }
 
 

@@ -8,7 +8,7 @@
 import Foundation
 
 class PostsViewModel: ObservableObject {
-    @Published var posts : [Post]?
+    @Published var posts : [Post] = []
     @Published var subreddit = "/"
     @Published var loadingState : loadingStateEnum = .IDLE
     var after : String?
@@ -20,15 +20,15 @@ class PostsViewModel: ObservableObject {
     }
     
     init(){
-        fetchPosts("/r/indonesia")
+        fetchPosts(subreddit)
     }
     
     func fetchPosts (_ subreddit : String) {
         loadingState = .LOADING
         callFetchPostAPI(subreddit) { result, error in
             if let error = error {
-                print(error.localizedDescription)
-                self.loadingState = .ERROR
+                print(error)
+                
             }
             if let result = result {
                 
@@ -38,12 +38,7 @@ class PostsViewModel: ObservableObject {
                     let decoded = try decoder.decode(PostMostOuter.self, from: result)
                     
                     DispatchQueue.main.async {
-                        if(self.posts == nil){
-                            self.posts = decoded.posts
-                        }else{
-                            self.posts!+=decoded.posts ?? []
-                        }
-                        
+                        self.posts+=decoded.posts!
                         self.after = decoded.after
                         self.loadingState = .IDLE
                     }
@@ -58,8 +53,8 @@ class PostsViewModel: ObservableObject {
     }
     
     private func callFetchPostAPI (_ subreddit : String, completion: @escaping (_ data: Data?, _ error: Error?) -> Void) {
-        var url = "https://www.reddit.com\(subreddit).json?"
-        
+        var url = "https://www.reddit.com/\(subreddit).json?"
+        print(url)
         if(after != nil){
             url+="after="+after!
         }
@@ -81,24 +76,12 @@ class PostsViewModel: ObservableObject {
         fetchPosts(subreddit)
     }
     
-    private struct PostMostOuter : Decodable {
-        let data : PostOuterData?
-        
-        var posts: [Post]? {
-            return data?.children?.map {$0.data}
-        }
-        var after : String?{
-            return data?.after
-        }
-    }
-    
-    private struct PostOuterData : Decodable {
-        let children: [PostListingChild]?
-        let after : String
-    }
-    
-    private struct PostListingChild : Decodable {
-        let data : Post
+    func changeSubreddit (sr : String){
+        print("Changing sr to \(sr)")
+        fetchPosts(sr)
+        self.posts = [];
+        self.subreddit = sr
+        fetchPosts(sr)
     }
     
     

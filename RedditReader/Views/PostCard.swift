@@ -32,7 +32,16 @@ struct PostCard: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(maxWidth : .infinity, alignment: .center)
-                        
+                        .background(
+                            NavigationLink("", destination: {
+                                switch post.url.getUrlType(){
+                                case .image :
+                                    FullImageView(imageURL: post.url)
+                                default :
+                                   WebView()
+                                }
+                            })
+                        )
                 }
                 
                 

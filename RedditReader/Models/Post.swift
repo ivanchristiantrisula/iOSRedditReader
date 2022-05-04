@@ -35,7 +35,7 @@ struct PostMostOuter : Decodable {
 
 struct PostOuterData : Decodable {
     let children: [PostListingChild]?
-    let after : String
+    let after : String?
 }
 
 struct PostListingChild : Decodable {

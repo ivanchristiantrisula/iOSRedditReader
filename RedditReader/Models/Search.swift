@@ -13,7 +13,7 @@ struct Subreddit : Decodable, Identifiable, Equatable, Hashable {
     let displayName : String
     let created : Float
     let displayNamePrefixed : String
-    let headerImg : String?
+    let iconImg : String?
 }
 
 struct SearchSubMostOuter : Decodable {
