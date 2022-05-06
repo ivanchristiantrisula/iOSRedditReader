@@ -20,6 +20,7 @@
 		8677CFE2281C269300B43EED /* InitialsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8677CFE1281C269300B43EED /* InitialsUI */; };
 		867EE74C2822BFB200596C99 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867EE74B2822BFB200596C99 /* Listing.swift */; };
 		867EE74E2822C64B00596C99 /* SubredditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867EE74D2822C64B00596C99 /* SubredditPost.swift */; };
+		86DE4D0E28239BCC00356788 /* CommentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DE4D0D28239BCC00356788 /* CommentCard.swift */; };
 		86F4F4A02726FDC500645F2C /* RedditReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4F49F2726FDC500645F2C /* RedditReaderApp.swift */; };
 		86F4F4A42726FDC700645F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86F4F4A32726FDC700645F2C /* Assets.xcassets */; };
 		86F4F4A72726FDC700645F2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86F4F4A62726FDC700645F2C /* Preview Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		8664EF0C280D23C10008942D /* FullImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageView.swift; sourceTree = "<group>"; };
 		867EE74B2822BFB200596C99 /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		867EE74D2822C64B00596C99 /* SubredditPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditPost.swift; sourceTree = "<group>"; };
+		86DE4D0D28239BCC00356788 /* CommentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCard.swift; sourceTree = "<group>"; };
 		86F4F49C2726FDC500645F2C /* RedditReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86F4F49F2726FDC500645F2C /* RedditReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditReaderApp.swift; sourceTree = "<group>"; };
 		86F4F4A32726FDC700645F2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,6 +66,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86DE4D06282392EF00356788 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				86F9A7EA2807E1E20065B9CD /* PostCard.swift */,
+				86F4F4B12726FE2500645F2C /* PostsView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		86DE4D07282392F900356788 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				8610BD092757F596001129D8 /* CommentView.swift */,
+				86DE4D0D28239BCC00356788 /* CommentCard.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		86DE4D082823931F00356788 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				865488D4281ACD2F000F63D8 /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		86F4F4932726FDC500645F2C = {
 			isa = PBXGroup;
 			children = (
@@ -104,13 +132,12 @@
 		86F4F4AD2726FDD000645F2C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				86F4F4B12726FE2500645F2C /* PostsView.swift */,
-				8610BD092757F596001129D8 /* CommentView.swift */,
-				86F9A7EA2807E1E20065B9CD /* PostCard.swift */,
+				86DE4D082823931F00356788 /* Search */,
+				86DE4D07282392F900356788 /* Comment */,
+				86DE4D06282392EF00356788 /* Post */,
 				8664EF0C280D23C10008942D /* FullImageView.swift */,
 				865488D0281A3F17000F63D8 /* VideoView.swift */,
 				865488D2281A4035000F63D8 /* WebView.swift */,
-				865488D4281ACD2F000F63D8 /* SearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,6 +258,7 @@
 				86F9A7EB2807E1E20065B9CD /* PostCard.swift in Sources */,
 				865488D3281A4035000F63D8 /* WebView.swift in Sources */,
 				865488DB281AD7AB000F63D8 /* Search.swift in Sources */,
+				86DE4D0E28239BCC00356788 /* CommentCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

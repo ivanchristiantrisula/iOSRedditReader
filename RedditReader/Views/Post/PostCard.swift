@@ -13,12 +13,14 @@ struct PostCard: View {
     var body: some View {
         
         ZStack{
-            VStack(alignment: .leading, spacing: 10){
+            VStack(alignment: .leading, spacing: 25){
                 //TITLE
                 Text(post.title)
                     .font(.headline)
+                    .bold()
                     .frame(maxWidth : .infinity, alignment: .topLeading)
                     .foregroundColor(post.stickied ? Color.green : Color.primary)
+                    
                 
                 //THUMBNAIL
                 if(post.thumbnail!.isValidURL){
