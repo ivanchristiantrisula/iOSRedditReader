@@ -12,7 +12,7 @@ struct RedditReaderApp: App {
     @State var activePage = "post"
     @State var comment = ""
     @State private var tabSelection = 1
-    @StateObject var postVM = PostsViewModel()
+    @State var postVM = PostsViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -23,11 +23,10 @@ struct RedditReaderApp: App {
                     }
                     .tag(1)
                 
-                SearchView(tabSelection: $tabSelection)
+                SearchView(postVM : self.postVM, tabSelection: $tabSelection)
                     .tabItem{
                         Label("Search", systemImage: "magnifyingglass")
                     }
-                    .environmentObject(postVM)
                     .tag(2)
                 
             }

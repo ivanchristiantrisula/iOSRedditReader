@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PostsView: View {
     @ObservedObject var postViewModel : PostsViewModel
-    @State var selectedPost : Post? = nil
+   
     var body: some View {
         posts
             
@@ -25,9 +25,8 @@ struct PostsView: View {
                                     postViewModel.getAfterPosts()
                                 }
                             }
-                            .onTapGesture(perform: {
-                                self.selectedPost = post
-                            })
+                            .allowsHitTesting(true)
+                            
                 }
                 .listRowInsets(EdgeInsets())
                 .padding(.vertical)
@@ -35,14 +34,14 @@ struct PostsView: View {
             .navigationTitle(filterPrefixedSrName(postViewModel.subreddit))
             .listStyle(PlainListStyle())
             .listRowSeparator(.hidden)
-            .sheet(item: self.$selectedPost, content: { post in
-                CommentView(commentViewModel: CommentsViewModel(post))
-            })
+            
             
             
             if(postViewModel.loadingState == .LOADING){
                 ProgressView().scaleEffect(1)
             }
+            
+            
         }
     }
 }
@@ -81,9 +80,9 @@ extension String {
 
 
 
-struct PostsView_Previews: PreviewProvider {
-    static var previews: some View {
-        let vm = PostsViewModel()
-        PostsView(postViewModel: vm)
-    }
-}
+//struct PostsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let vm = PostsViewModel()
+//        PostsView(postViewModel: vm)
+//    }
+//}

@@ -17,6 +17,8 @@ struct CommentView: View {
         }
         .listStyle(PlainListStyle())
         .listRowSeparator(.hidden)
+        .navigationTitle("\(String(commentViewModel.comments.count)) Comments")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -35,18 +37,19 @@ struct RecursiveReply: View {
 
             }else{
                 CommentCard(comment: comment, depth : depth)
-                    .onTapGesture {
-                        print(comment)
-                    }
+                    .allowsHitTesting(false)
                 if(comment.repliesComments != nil){
                     RecursiveReply(comments: comment.repliesComments!, depth: self.depth+1)
                 }
+                
             }
             
             
         }
     }
 }
+
+
 
 //struct CommentView_Previews: PreviewProvider {
 //    static var previews: some View {

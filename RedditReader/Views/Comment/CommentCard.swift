@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 struct CommentCard: View {
     let comment : Comment
     let depth : Int
     let borderColor : [Color] = [.red, .green, .blue, .orange, .purple]
+    
+    
+    @State var showProfile = false
+    @State var isCollapsed = false
     
     var body: some View {
         ZStack{
@@ -18,7 +23,7 @@ struct CommentCard: View {
                 //TOP
                 HStack{
                     Text(comment.author ?? "")
-                        .bold()
+                        .foregroundColor(authorColor(comment))
                     Image(systemName: "arrow.up")
                         .font(.headline)
                     Text(String(comment.score ?? 0 ))
@@ -27,10 +32,14 @@ struct CommentCard: View {
                     Text("9h")
                         .font(.subheadline)
                 }
-                Text(comment.body ?? "")
-                    .frame(maxWidth : .infinity, alignment: .topLeading)
-                    .font(.body)
-                    .fixedSize(horizontal: false, vertical: true)
+                .onTapGesture {
+                    print("masokkkk")
+                }
+                
+                if(!isCollapsed){
+                    try! Markdown(Document(markdown: comment.body!))
+                }
+                
             }
             .padding()
             .background(.regularMaterial).cornerRadius(10)
@@ -40,12 +49,44 @@ struct CommentCard: View {
                     Rectangle().frame(width: 5)
                     Spacer()
                 }
-            ).allowsHitTesting(false))   // << make click-through
+            ).allowsHitTesting(false)  ) // << make click-through
+            
+            ZStack{
+                NavigationLink("", destination: ProfileView(profileViewModel: ProfileViewModel(comment.author!)), isActive: $showProfile).hidden()
+            }.frame(width: 0, height: 0)
         }
         .padding(.leading, CGFloat(depth)*10)
+        .swipeActions(allowsFullSwipe: false) {
+            Button {
+                withAnimation {
+                    showProfile.toggle()
+                }
+                
+            } label: {
+                Label("Profile", systemImage: "person.fill")
+            }
+            .tint(.indigo)
+
+            Button {
+                isCollapsed.toggle()
+            } label: {
+                Label(isCollapsed ? "Expand" : "Collapse", systemImage: isCollapsed ? "eye.fill" : "eye.slash.fill")
+            }.tint(.yellow)
+        }
         
         
+    }
+}
+
+func authorColor(_ comment : Comment) -> Color{
+    let distinct = comment.distinguished
+    
+    switch distinct {
+    case "moderator" :
+        return .green
         
+    default :
+        return .primary
     }
 }
 

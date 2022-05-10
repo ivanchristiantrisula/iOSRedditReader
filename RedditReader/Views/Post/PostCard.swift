@@ -10,63 +10,102 @@ import Kingfisher
 
 struct PostCard: View {
     let post : Post;
+    @State var openComment : Bool = false
+    @State var showAuthor : Bool = false
+    @State var showSR : Bool = false
+    @State var showMedia : Bool = false
+    
     var body: some View {
         
         ZStack{
-            VStack(alignment: .leading, spacing: 25){
+            VStack(alignment: .leading, spacing: 15){
                 //TITLE
                 Text(post.title)
                     .font(.headline)
                     .bold()
+                    .onTapGesture(perform: {
+                        self.openComment = true
+                    })
                     .frame(maxWidth : .infinity, alignment: .topLeading)
                     .foregroundColor(post.stickied ? Color.green : Color.primary)
-                    
                 
                 //THUMBNAIL
-                if(post.thumbnail!.isValidURL){
-                    KFImage
-                        .url(URL(string : post.thumbnail ?? ""))
-                        .loadDiskFileSynchronously()
-                        .placeholder { progress in
-                            ProgressView();
-                        }
-                        .cacheMemoryOnly()
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth : .infinity, alignment: .center)
-                        .background(
-                            NavigationLink("", destination: {
-                                switch post.url.getUrlType(){
-                                case .image :
-                                    FullImageView(imageURL: post.url)
-                                default :
-                                   WebView()
+                    if(post.thumbnail!.isValidURL){
+                        ZStack{
+                            KFImage
+                                .url(URL(string : post.thumbnail ?? ""))
+                                .loadDiskFileSynchronously()
+                                .placeholder { progress in
+                                    ProgressView();
                                 }
-                            })
-                        )
+                                .cacheMemoryOnly()
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxWidth : .infinity, alignment: .center)
+                        }
                 }
                 
-                
-                //AUTHOR
-                Text("by u/\(post.author) on r/\(post.subreddit)")
-                    .font(.subheadline)
-                    .frame(maxWidth : .infinity, alignment: .topLeading)
+                //AUTHOR AND POST SUB
+                HStack(){
+                    Text("By")
+                    
+                    Text(post.author)
+                    .foregroundColor(.accentColor)
+                    .onTapGesture {
+                        showAuthor.toggle()
+                    }
+                    
+                    Text(" on ")
+                    Text(post.subreddit)
+                        .foregroundColor(Color.accentColor)
+                        .onTapGesture {
+                            showSR.toggle()
+                        }
+                }
+                .font(.system(size: 15))
                 
                 //POST ACTION
                 HStack() {
                     //UPVOTE BUTTON HERE
-                    Label(String(post.score), systemImage: "arrow.up")
                     
+                    Button {
+                        //upvote
+                    } label: {
+                        Label(String(post.score)+"  ", systemImage: "arrow.up").padding(5)
+                    }.overlay {
+                        RoundedRectangle(cornerRadius: 25).strokeBorder(.white)
+                    }
+
                     //COMMENT NUM HERE
-                    Label(String(post.numComments), systemImage: "bubble.right")
+                    Button {
+                        self.openComment = true
+                    } label: {
+                        Label(String(post.numComments)+"  ", systemImage: "bubble.right").padding(5)
+                    }.overlay {
+                        RoundedRectangle(cornerRadius: 25).strokeBorder(.white)
+                    }
                     
                     //Post Time here
-                    Label("11H", systemImage: "clock")
+                    
+                    Button {
+                        //upvote
+                    } label: {
+                        Label("11H"+"  ", systemImage: "clock").padding(5)
+                    }.overlay {
+                        RoundedRectangle(cornerRadius: 25).strokeBorder(.white)
+                    }
                 }
             }
             .padding()
             .background(.regularMaterial).cornerRadius(16)
             
+            //hidden nav links
+            ZStack{
+                NavigationLink("", destination: ProfileView(profileViewModel: ProfileViewModel(post.author)), isActive: $showAuthor).hidden()
+                NavigationLink("", destination: Text("SR"), isActive: $showSR).hidden()
+                NavigationLink("", destination: FullImageView(imageURL: post.url), isActive: $showMedia).hidden()
+                NavigationLink("", destination: CommentView(commentViewModel: CommentsViewModel(post)), isActive: $openComment )
+            }.frame(width: 0, height: 0, alignment: .center)
         }
         .frame(maxWidth : .infinity, alignment: .topLeading)
         
@@ -83,10 +122,6 @@ extension String {
             return false
         }
     }
-    
-    
-    
-    
 }
 
 //struct PostCard_Previews: PreviewProvider {

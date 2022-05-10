@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8610BD08275741A6001129D8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8610BD07275741A6001129D8 /* Comment.swift */; };
 		8610BD0A2757F596001129D8 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8610BD092757F596001129D8 /* CommentView.swift */; };
+		862B2CA12828AE6600FCF898 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862B2CA02828AE6600FCF898 /* ProfileView.swift */; };
 		865488D1281A3F17000F63D8 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865488D0281A3F17000F63D8 /* VideoView.swift */; };
 		865488D3281A4035000F63D8 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865488D2281A4035000F63D8 /* WebView.swift */; };
 		865488D5281ACD2F000F63D8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865488D4281ACD2F000F63D8 /* SearchView.swift */; };
@@ -20,7 +21,10 @@
 		8677CFE2281C269300B43EED /* InitialsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8677CFE1281C269300B43EED /* InitialsUI */; };
 		867EE74C2822BFB200596C99 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867EE74B2822BFB200596C99 /* Listing.swift */; };
 		867EE74E2822C64B00596C99 /* SubredditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 867EE74D2822C64B00596C99 /* SubredditPost.swift */; };
+		8690785C282A3760003F30E0 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8690785B282A3760003F30E0 /* ProfileViewModel.swift */; };
+		86B3F3F62827EFE300513F74 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B3F3F52827EFE300513F74 /* UserInfo.swift */; };
 		86DE4D0E28239BCC00356788 /* CommentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86DE4D0D28239BCC00356788 /* CommentCard.swift */; };
+		86DE4D132826C55400356788 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 86DE4D122826C55400356788 /* MarkdownUI */; };
 		86F4F4A02726FDC500645F2C /* RedditReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F4F49F2726FDC500645F2C /* RedditReaderApp.swift */; };
 		86F4F4A42726FDC700645F2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86F4F4A32726FDC700645F2C /* Assets.xcassets */; };
 		86F4F4A72726FDC700645F2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86F4F4A62726FDC700645F2C /* Preview Assets.xcassets */; };
@@ -33,6 +37,7 @@
 /* Begin PBXFileReference section */
 		8610BD07275741A6001129D8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		8610BD092757F596001129D8 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		862B2CA02828AE6600FCF898 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		865488D0281A3F17000F63D8 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		865488D2281A4035000F63D8 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		865488D4281ACD2F000F63D8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -42,6 +47,8 @@
 		8664EF0C280D23C10008942D /* FullImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageView.swift; sourceTree = "<group>"; };
 		867EE74B2822BFB200596C99 /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		867EE74D2822C64B00596C99 /* SubredditPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditPost.swift; sourceTree = "<group>"; };
+		8690785B282A3760003F30E0 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		86B3F3F52827EFE300513F74 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		86DE4D0D28239BCC00356788 /* CommentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCard.swift; sourceTree = "<group>"; };
 		86F4F49C2726FDC500645F2C /* RedditReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86F4F49F2726FDC500645F2C /* RedditReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditReaderApp.swift; sourceTree = "<group>"; };
@@ -58,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86DE4D132826C55400356788 /* MarkdownUI in Frameworks */,
 				8664EF13280D4AB70008942D /* Kingfisher in Frameworks */,
 				8677CFE2281C269300B43EED /* InitialsUI in Frameworks */,
 			);
@@ -66,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86B3F3F728281EB200513F74 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				862B2CA02828AE6600FCF898 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		86DE4D06282392EF00356788 /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +148,7 @@
 		86F4F4AD2726FDD000645F2C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				86B3F3F728281EB200513F74 /* Profile */,
 				86DE4D082823931F00356788 /* Search */,
 				86DE4D07282392F900356788 /* Comment */,
 				86DE4D06282392EF00356788 /* Post */,
@@ -150,6 +167,7 @@
 				865488DA281AD7AB000F63D8 /* Search.swift */,
 				867EE74B2822BFB200596C99 /* Listing.swift */,
 				867EE74D2822C64B00596C99 /* SubredditPost.swift */,
+				86B3F3F52827EFE300513F74 /* UserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -160,6 +178,7 @@
 				86F4F4B52726FE8D00645F2C /* PostsViewModel.swift */,
 				865ED1E6280B3D7100613CF7 /* CommentsViewModel.swift */,
 				865488D8281AD497000F63D8 /* SearchSubViewModel.swift */,
+				8690785B282A3760003F30E0 /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -183,6 +202,7 @@
 			packageProductDependencies = (
 				8664EF12280D4AB70008942D /* Kingfisher */,
 				8677CFE1281C269300B43EED /* InitialsUI */,
+				86DE4D122826C55400356788 /* MarkdownUI */,
 			);
 			productName = RedditReader;
 			productReference = 86F4F49C2726FDC500645F2C /* RedditReader.app */;
@@ -215,6 +235,7 @@
 			packageReferences = (
 				8664EF11280D4AB70008942D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				8677CFE0281C269300B43EED /* XCRemoteSwiftPackageReference "InitialsUI" */,
+				86DE4D112826C55400356788 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 			);
 			productRefGroup = 86F4F49D2726FDC500645F2C /* Products */;
 			projectDirPath = "";
@@ -250,14 +271,17 @@
 				865488D9281AD497000F63D8 /* SearchSubViewModel.swift in Sources */,
 				86F4F4A02726FDC500645F2C /* RedditReaderApp.swift in Sources */,
 				867EE74C2822BFB200596C99 /* Listing.swift in Sources */,
+				862B2CA12828AE6600FCF898 /* ProfileView.swift in Sources */,
 				865ED1E7280B3D7100613CF7 /* CommentsViewModel.swift in Sources */,
 				865488D1281A3F17000F63D8 /* VideoView.swift in Sources */,
 				867EE74E2822C64B00596C99 /* SubredditPost.swift in Sources */,
 				86F4F4B22726FE2500645F2C /* PostsView.swift in Sources */,
 				86F4F4B42726FE7400645F2C /* Post.swift in Sources */,
+				8690785C282A3760003F30E0 /* ProfileViewModel.swift in Sources */,
 				86F9A7EB2807E1E20065B9CD /* PostCard.swift in Sources */,
 				865488D3281A4035000F63D8 /* WebView.swift in Sources */,
 				865488DB281AD7AB000F63D8 /* Search.swift in Sources */,
+				86B3F3F62827EFE300513F74 /* UserInfo.swift in Sources */,
 				86DE4D0E28239BCC00356788 /* CommentCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +505,14 @@
 				kind = branch;
 			};
 		};
+		86DE4D112826C55400356788 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -493,6 +525,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8677CFE0281C269300B43EED /* XCRemoteSwiftPackageReference "InitialsUI" */;
 			productName = InitialsUI;
+		};
+		86DE4D122826C55400356788 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 86DE4D112826C55400356788 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

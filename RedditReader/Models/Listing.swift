@@ -78,6 +78,8 @@ public enum GenericListingContent: Decodable, Identifiable {
         switch kind {
         case "t1":
             self = .comment(try container.decode(Comment.self, forKey: .data))
+        case "t2":
+            self = .userInfo(try container.decode(UserInfo.self, forKey: .data))
         case "t3":
             self = .post(try container.decode(SubredditPost.self, forKey: .data))
         default:
@@ -87,5 +89,6 @@ public enum GenericListingContent: Decodable, Identifiable {
     
     case post(SubredditPost)
     case comment(Comment)
+    case userInfo(UserInfo)
     case notSupported
 }

@@ -13,7 +13,7 @@ import InitialsUI
 struct SearchView: View {
     @ObservedObject var searchSubVM = SearchSubViewModel()
     @State var searchText: String = ""
-    @EnvironmentObject var postVM : PostsViewModel;
+    @ObservedObject var postVM : PostsViewModel;
     @Binding var tabSelection: Int
     
     var body: some View {

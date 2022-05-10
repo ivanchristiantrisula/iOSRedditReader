@@ -27,7 +27,7 @@ public struct Comment: Decodable, Identifiable {
     public var score: Int?
     public var likes: Bool?
     public var saved: Bool?
-    
+    public var distinguished : String?
     public let permalink: String?
     public var permalinkURL: URL? {
         guard let permalink = permalink else { return nil }
